@@ -80,6 +80,8 @@ doctrine:
                         RAND: Exeu\MiscBundle\Doctrine\Extension\Rand
 ```
 
+(See: [Registering Custom DQL Functiona](http://symfony.com/doc/current/cookbook/doctrine/custom_dql_functions.html) )
+
 If you have done this you can use the RAND() Function in your DQL Select Part:
 
 ``` php
