@@ -15,35 +15,46 @@
  * limitations under the License.
  */
 
-namespace Exeu\MiscBundle\Doctrine\Extension;
+namespace Exeu\MiscBundle\Validator;
 
-use Doctrine\ORM\Query\AST\Functions\FunctionNode;
-use Doctrine\ORM\Query\Lexer;
+use Symfony\Component\Validator\Constraint;
 
 /**
- * Adds RAND() support to DQL queries
- *
+ * Constraint for an ImageDimension
+ * @Annotation
  * @author Jan Eichhorn <exeu65@googlemail.com>
- *
- * RandFunction ::= "RAND" "("")"
  */
-class Rand extends FunctionNode
+class ImageDimension extends Constraint
 {
+    public $minDimension = array();
+    public $maxDimension = array();
+    public $minMessage = "The image is to small. At min: %width%x%height%!";
+    public $maxMessage = "The image is to big. At max: %width%x%height%!";
+
     /**
      * {@inheritDoc}
      */
-    public function parse(\Doctrine\ORM\Query\Parser $parser)
+    public function getRequiredOptions()
     {
-        $parser->match(Lexer::T_IDENTIFIER);
-        $parser->match(Lexer::T_OPEN_PARENTHESIS);
-        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
+        return array();
     }
 
     /**
+     * The validator must be defined as a service with this name.
+     *
+     * @return string
+     */
+    public function validatedBy()
+    {
+        return "exeu.extra.validator.imagedimension";
+    }
+
+
+    /**
      * {@inheritDoc}
      */
-    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
+    public function getTargets()
     {
-        return 'RAND()';
+        return self::PROPERTY_CONSTRAINT;
     }
 }

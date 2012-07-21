@@ -20,7 +20,7 @@ namespace Exeu\MiscBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * @author Jan Eichhorn
+ * @author Jan Eichhorn <exeu65@googlemail.com>
  */
 class ExeuMiscBundle extends Bundle
 {

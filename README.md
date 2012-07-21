@@ -57,6 +57,24 @@ To get an URL of your asset you can user the following twig function:
 <img src="{{ asset_url('bundles/acmebundle/images/image.jpg') }}">
 ```
 
+You also can setup an statichost in your config.yml:
+
+``` yaml
+# app/config/config.yml
+
+exeu_misc:
+    twig:
+        staticHost: http://mystatic.image.host.com
+```
+
+To use this statichost URL call the asset_url function with the second parameter set to true:
+
+``` html
+<img src="{{ asset_url('bundles/acmebundle/images/image.jpg', true) }}">
+```
+
+This could be usefull if you generate templates with the CLI.
+
 ### Doctrine ###
 
 #### RAND() ####

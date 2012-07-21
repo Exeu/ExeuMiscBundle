@@ -24,14 +24,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * This class provides some usefull functions extending the twig asset management.
  *
- * @author Jan Eichhorn
+ * @author Jan Eichhorn <exeu65@googlemail.com>
  */
 class AdvancedAssetExtension extends \Twig_Extension {
 
     private $container;
+    private $staticHost = null;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @param Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @param boolean $staticHost The static host URL
+     */
+    public function __construct(ContainerInterface $container, $staticHost = null)
     {
+        $this->staticHost = $staticHost;
         $this->container = $container;
     }
 
@@ -51,27 +57,35 @@ class AdvancedAssetExtension extends \Twig_Extension {
      * Returns the public URL of an asset.
      *
      * @param string $path        A public path
+     * @param boolean $useStaticHost  Use the static host var?
      * @param string $packageName The name of the asset package to use
      *
      * @return string A public URL which takes into account the base path and URL path
      */
-    public function getAssetUrl($path, $packageName = null)
+    public function getAssetUrl($path, $useStaticHost = false, $packageName = null)
     {
-        return $this->addSchemeAndHost($this->container->get('templating.helper.assets')->getUrl($path, $packageName));
+        return $this->addSchemeAndHost($this->container->get('templating.helper.assets')->getUrl($path, $packageName), $useStaticHost);
     }
 
     /**
-     * Concats the AssetPath with scheme and hostname from request
+     * Concats the AssetPath with scheme and hostname from request or an statichost
      *
-     * @param string $path
+     * @param string  $path           A public path
+     * @param boolean $useStaticHost  Use the static host var?
      *
      * @return string A public URL which takes into account the base path and URL path
      */
-    private function addSchemeAndHost($path)
+    private function addSchemeAndHost($path, $useStaticHost = false)
     {
-        $request = $this->container->get('request');
+        $host = "";
+        if (false === $useStaticHost) {
+            $request = $this->container->get('request');
+            $host = $request->getScheme() . "://" . $request->getHost();
+        } else {
+            $host = $this->staticHost;
+        }
 
-        return $request->getScheme() . "://" . $request->getHost() . $path;
+        return  $host . $path;
     }
 
     /**

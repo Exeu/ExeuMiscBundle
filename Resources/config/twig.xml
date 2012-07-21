@@ -12,6 +12,7 @@
         <service id="exeu.extra.twig.advancedassets" class="%twig.advacendassets.class%" public="false">
             <tag name="twig.extension" />
             <argument type="service" id="service_container" />
+            <argument>null</argument>
         </service>
     </services>
 </container>

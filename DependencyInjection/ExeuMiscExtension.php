@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * @author Jan Eichhorn
+ * @author Jan Eichhorn <exeu65@googlemail.com>
  */
 class ExeuMiscExtension extends Extension
 {
@@ -37,5 +37,10 @@ class ExeuMiscExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('twig.xml');
+        $loader->load('validator.xml');
+
+        if (false === empty($config['twig']['staticHost'])) {
+            $container->getDefinition('exeu.extra.twig.advancedassets')->replaceArgument(1, $config['twig']['staticHost']);
+        }
     }
 }
