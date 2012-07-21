@@ -4,7 +4,7 @@
     "description": "Exeu Misc Bundle",
     "keywords": ["Extras"],
     "homepage": "https://github.com/Exeu/ExeuMiscBundle",
-    "license": "Apache",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Jan Eichhorn",
@@ -14,8 +14,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": "2.*.*",
-        "twig/twig": "*"
+        "symfony/framework-bundle": "2.*.*"
     },
     "require-dev": {
     },
