@@ -2,7 +2,7 @@
     "name": "exeu/misc-bundle",
     "type": "symfony-bundle",
     "description": "Exeu Misc Bundle",
-    "keywords": ["Extras"],
+    "keywords": ["Extras", "Features", "Twig", "Doctrine"],
     "homepage": "https://github.com/Exeu/ExeuMiscBundle",
     "license": "Apache-2.0",
     "authors": [
@@ -14,7 +14,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": "2.1.*"
+        "symfony/framework-bundle": "2.*"
     },
     "require-dev": {
     },
