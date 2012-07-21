@@ -98,7 +98,9 @@ With this bundle you can activate the MySQL RAND() Function.
 
 You have to add the following to your config.yml:
 
-``` ini
+``` yaml
+# app/config/config.yml
+
 doctrine:
 
     orm:
