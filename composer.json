@@ -1,0 +1,26 @@
+{
+    "name": "exeu/misc-bundle",
+    "type": "symfony-bundle",
+    "description": "Exeu Misc Bundle",
+    "keywords": ["Extras"],
+    "homepage": "https://github.com/Exeu/ExeuMiscBundle",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Jan Eichhorn",
+            "email": "exeu65@googlemail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.*.*",
+        "twig/twig": "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-0": { "Exeu\\MiscBundle": "" }
+    },
+    "target-dir": "Exeu/MiscBundle"
+}
