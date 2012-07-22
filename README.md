@@ -187,3 +187,16 @@ maxMessage -> The message that should be displayed when the image is to big (pla
 invalidFileMessage -> The message that shold be displayed when the file is no valid image
 
 **If you only provide either minDimension or maxDimension your image will validate only against this dimension**
+
+**Combine it with the ImageValidator**
+
+``` php
+<?php
+//...
+    /**
+     * @Assert\Image(maxSize="1M", mimeTypes={"image/gif", "image/jpeg", "image/png"})
+     * @ImageDimension(minDimension={422, 422})
+     */
+    private $file;
+/...
+```
