@@ -17,6 +17,7 @@
 
 namespace Exeu\MiscBundle\Validator;
 
+use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -38,8 +39,30 @@ class ImageDimensionValidator extends ConstraintValidator
      */
     public function isValid($file, Constraint $constraint)
     {
-        $this->dimensions = getimagesize($file->getPathname());
+        $filePath = "";
+        if (true === is_string($file)) {
+            if (false === file_exists($file) || false === is_readable($file)) {
+                throw new IOException(sprintf("The filename %s you provided either does not exist or is not readable!", $file));
+            }
+
+            $filePath = $file;
+        } else if (true === is_object($file)) {
+            $reflectionClass = new \ReflectionClass($file);
+            if (false === $reflectionClass->isSubclassOf('\SplFileInfo')) {
+                throw new \InvalidArgumentException("The fileobject you provided should be an instance of \SplFileInfo or a child class of it!");
+            }
+
+            $filePath = $file->getPathname();
+        } else {
+            throw new \InvalidArgumentException("The Property you validate has to be either an object from kind \SplFileInfo or a String with the full file path");
+        }
+
+        $this->dimensions = getimagesize($filePath);
         $this->constraint = $constraint;
+
+        if (true === empty($this->dimensions)) {
+            throw new \InvalidArgumentException(sprintf("Could not get imagedimensions of the file you provided. Please check if it is an valid imagefile!"));
+        }
 
         if (false === $this->checkMinDimensions() || false === $this->checkMaxDimensions()) {
             return false;

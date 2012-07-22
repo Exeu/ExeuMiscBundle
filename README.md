@@ -110,3 +110,58 @@ $query = $em->createQuery("SELECT p, RAND() as c FROM AcmeTestBundle:User p ORDE
 $randomUsers = $query->getResult();
 ...
 ```
+
+### Validation ###
+
+#### ImageDimension ####
+
+To validate the dimension of an Image you can use the ImageDimension-Validator provided with this bundle:
+
+``` php
+<?php
+...
+use Exeu\MiscBundle\Validator\ImageDimension;
+...
+/**
+ * @ORM\Entity
+ */
+class Test
+{
+    ...
+
+    /**
+     * @ImageDimension(minDimension={422, 422}, maxDimension={500, 100})
+     */
+    public $file;
+```
+
+The $file property either can be a string or an object.
+
+``` php
+<?php
+...
+public function buildForm(FormBuilderInterface $builder, array $options)
+{
+    // an object example
+    $builder->add('file', 'file');
+
+    // an string example
+    $builder->add('file', 'text');
+}
+```
+Annotation description:
+
+``` php
+<?php
+/**
+ * @ImageDimension(minDimension={422, 422}, maxDimension={500, 100}, minMessage="The image is to small. At min: %width%x%height%!", maxMessage="The image is to big. At max: %width%x%height%!")
+ */
+public $file;
+```
+
+minDimension -> an array of width an height in px
+maxDimension -> an array of width an height in px
+minMessage -> The message that should be displayed when the image is to small (placeholder %width%, %height%)
+maxMessage -> The message that should be displayed when the image is to big (placeholder %width%, %height%)
+
+**If you only provide either minDimension or maxDimension your image will validate only against this dimension**
