@@ -49,7 +49,7 @@ $bundles = array(
 
 ### Twig ###
 
-** asset_url **
+**asset_url**
 
 To get an URL of your asset you can user the following twig function:
 
@@ -77,7 +77,7 @@ This could be usefull if you generate templates with the CLI.
 
 ### Doctrine ###
 
-** RAND() **
+**RAND()**
 
 With this bundle you can activate the MySQL RAND() Function.
 
@@ -113,7 +113,7 @@ $randomUsers = $query->getResult();
 
 ### Validation ###
 
-** ImageDimension **
+**ImageDimension**
 
 To validate the dimension of an Image you can use the ImageDimension-Validator provided with this bundle:
 
