@@ -121,11 +121,11 @@ If you have done this you can use the RAND() Function in your DQL Select Part:
 
 ``` php
 <?php
-...
+// ...
 $em = $this->getDoctrine()->getEntityManager();
 $query = $em->createQuery("SELECT p, RAND() as c FROM AcmeTestBundle:User p ORDER BY c");
 $randomUsers = $query->getResult();
-...
+// ...
 ```
 
 ### Validation ###
@@ -136,15 +136,15 @@ To validate the dimension of an Image you can use the ImageDimension-Validator p
 
 ``` php
 <?php
-...
+// ...
 use Exeu\MiscBundle\Validator\ImageDimension;
-...
+// ...
 /**
  * @ORM\Entity
  */
 class Test
 {
-    ...
+    // ...
 
     /**
      * @ImageDimension(minDimension={422, 422}, maxDimension={500, 100})
@@ -156,7 +156,7 @@ The $file property either can be a string or an object.
 
 ``` php
 <?php
-...
+// ...
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
     // an object example
@@ -192,11 +192,11 @@ invalidFileMessage -> The message that shold be displayed when the file is no va
 
 ``` php
 <?php
-//...
-    /**
-     * @Assert\Image(maxSize="1M", mimeTypes={"image/gif", "image/jpeg", "image/png"})
-     * @ImageDimension(minDimension={422, 422})
-     */
-    private $file;
-/...
+// ...
+/**
+ * @Assert\Image(maxSize="1M", mimeTypes={"image/gif", "image/jpeg", "image/png"})
+ * @ImageDimension(minDimension={422, 422})
+ */
+private $file;
+// ...
 ```
