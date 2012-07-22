@@ -154,7 +154,7 @@ Annotation description:
 ``` php
 <?php
 /**
- * @ImageDimension(minDimension={422, 422}, maxDimension={500, 100}, minMessage="The image is to small. At min: %width%x%height%!", maxMessage="The image is to big. At max: %width%x%height%!")
+ * @ImageDimension(minDimension={422, 422}, maxDimension={500, 100}, minMessage="The image is to small. At min: %width%x%height%!", maxMessage="The image is to big. At max: %width%x%height%!", invalidFileMessage="The file you provided is no valid image!")
  */
 public $file;
 ```
@@ -166,5 +166,7 @@ maxDimension -> an array of width an height in px
 minMessage -> The message that should be displayed when the image is to small (placeholder %width%, %height%)
 
 maxMessage -> The message that should be displayed when the image is to big (placeholder %width%, %height%)
+
+invalidFileMessage -> The message that shold be displayed when the file is no valid image
 
 **If you only provide either minDimension or maxDimension your image will validate only against this dimension**

@@ -61,7 +61,9 @@ class ImageDimensionValidator extends ConstraintValidator
         $this->constraint = $constraint;
 
         if (true === empty($this->dimensions)) {
-            throw new \InvalidArgumentException(sprintf("Could not get imagedimensions of the file you provided. Please check if it is an valid imagefile!"));
+            $this->context->addViolation($constraint->invalidFileMessage);
+
+            return false;
         }
 
         if (false === $this->checkMinDimensions() || false === $this->checkMaxDimensions()) {

@@ -30,6 +30,7 @@ class ImageDimension extends Constraint
     public $maxDimension = array();
     public $minMessage = "The image is to small. At min: %width%x%height%!";
     public $maxMessage = "The image is to big. At max: %width%x%height%!";
+    public $invalidFileMessage = "The file you provided is no valid image!";
 
     /**
      * {@inheritDoc}
