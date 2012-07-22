@@ -28,7 +28,9 @@ $loader->registerNamespaces(array(
 
 Now run the vendors script:
 
-`php bin/vendors install`
+``` bash
+$ php bin/vendors install
+```
 
 ### Symfony 2.1.x
 
