@@ -13,6 +13,23 @@ Add the following lines in your `deps` file:
     target=bundles/Exeu/MiscBundle
 ```
 
+Modify the autoload.php:
+
+``` php
+<?php
+
+// app/autoload.php
+$loader->registerNamespaces(array(
+    // ...
+    'Exeu'              => __DIR__.'/../vendor/bundles',
+    // ...
+));
+```
+
+Now run the vendors script:
+
+`php bin/vendors install`
+
 ### Symfony 2.1.x
 
 Add ExeuMiscBundle in your composer.json:
@@ -98,7 +115,7 @@ doctrine:
                         RAND: Exeu\MiscBundle\Doctrine\Extension\Rand
 ```
 
-(See: [Registering Custom DQL Functiona](http://symfony.com/doc/current/cookbook/doctrine/custom_dql_functions.html) )
+(See: [Registering Custom DQL Functions](http://symfony.com/doc/current/cookbook/doctrine/custom_dql_functions.html) )
 
 If you have done this you can use the RAND() Function in your DQL Select Part:
 
