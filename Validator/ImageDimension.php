@@ -35,25 +35,6 @@ class ImageDimension extends Constraint
     /**
      * {@inheritDoc}
      */
-    public function getRequiredOptions()
-    {
-        return array();
-    }
-
-    /**
-     * The validator must be defined as a service with this name.
-     *
-     * @return string
-     */
-    public function validatedBy()
-    {
-        return "exeu.extra.validator.imagedimension";
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
     public function getTargets()
     {
         return self::PROPERTY_CONSTRAINT;

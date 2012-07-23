@@ -48,7 +48,7 @@ class ImageDimensionValidator extends ConstraintValidator
             $filePath = $file;
         } else if (true === is_object($file)) {
             $reflectionClass = new \ReflectionClass($file);
-            if (false === $reflectionClass->isSubclassOf('\SplFileInfo')) {
+            if (false === $reflectionClass->isSubclassOf('\SplFileInfo') && !$file instanceof \SplFileInfo) {
                 throw new \InvalidArgumentException("The fileobject you provided should be an instance of \SplFileInfo or a child class of it!");
             }
 
@@ -66,7 +66,9 @@ class ImageDimensionValidator extends ConstraintValidator
             return false;
         }
 
-        if (false === $this->checkMinDimensions() || false === $this->checkMaxDimensions()) {
+        $minDimensionCheck = $this->checkMinDimensions();
+        $maxDimensionCheck = $this->checkMaxDimensions();
+        if (false === $minDimensionCheck || false === $maxDimensionCheck) {
             return false;
         }
 

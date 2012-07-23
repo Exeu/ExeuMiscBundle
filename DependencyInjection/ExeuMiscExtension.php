@@ -37,7 +37,6 @@ class ExeuMiscExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('twig.xml');
-        $loader->load('validator.xml');
 
         if (false === empty($config['twig']['staticHost'])) {
             $container->getDefinition('exeu.extra.twig.advancedassets')->replaceArgument(1, $config['twig']['staticHost']);
