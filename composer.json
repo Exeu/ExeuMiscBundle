@@ -17,6 +17,7 @@
         "symfony/framework-bundle": "2.*"
     },
     "require-dev": {
+        "beberlei/DoctrineExtensions": "*"
     },
     "autoload": {
         "psr-0": { "Exeu\\MiscBundle": "" }
