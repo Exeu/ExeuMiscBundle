@@ -1,6 +1,8 @@
 Exeu Misc Bundle
 ========================
 
+[![Build Status](https://secure.travis-ci.org/Exeu/ExeuMiscBundle.png?branch=master)](http://travis-ci.org/Exeu/ExeuMiscBundle)
+
 ## Installation
 
 ### Symfony 2.0.x
