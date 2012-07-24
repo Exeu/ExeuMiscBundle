@@ -37,7 +37,6 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         $driver = $config->newDefaultAnnotationDriver(__DIR__.'/Entities', false);
         $config->setMetadataDriverImpl($driver);
 
-
         $config->addCustomNumericFunction('RAND', "Exeu\MiscBundle\Doctrine\Extension\Rand");
         $conn = array(
             'driver' => 'pdo_sqlite',

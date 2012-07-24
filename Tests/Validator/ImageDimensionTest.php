@@ -30,15 +30,78 @@ use \SplFileInfo;
  */
 class ImageDimensionTest extends \PHPUnit_Framework_TestCase
 {
+    private $imagePath = null;
+    
     private $validator;
 
     public function setUp()
     {
+        $this->imagePath = __DIR__.'/../meta/symfony_black_01.png';
         $this->validator = new Validator(
             new ClassMetadataFactory(new StaticMethodLoader()),
             new ConstraintValidatorFactory()
         );
     }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testWrongTypeException()
+    {
+        $constraint = new ImageDimension(array(
+            'maxDimension' => array(200, 200),
+            'minDimension' => array(3000, 3000)
+        ));
+
+        $violations = $this->validator->validateValue(true, $constraint);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testWrongObjectException()
+    {
+        $constraint = new ImageDimension(array(
+            'maxDimension' => array(200, 200),
+            'minDimension' => array(3000, 3000)
+        ));
+
+        $violations = $this->validator->validateValue(new \stdClass(), $constraint);
+    }   
+
+    /**
+     * @expectedException Symfony\Component\Filesystem\Exception\IOException
+     */
+    public function testNonExistingFileException()
+    {
+        $constraint = new ImageDimension(array(
+            'maxDimension' => array(200, 200),
+            'minDimension' => array(3000, 3000)
+        ));
+
+        $violations = $this->validator->validateValue('/foo/bar', $constraint);
+    }   
+
+    public function testInvalidFileType()
+    {
+        $constraint = new ImageDimension(array(
+            'maxDimension' => array(200, 200),
+            'minDimension' => array(3000, 3000)
+        ));
+
+        $violations = $this->validator->validateValue(__FILE__, $constraint);
+        
+        $this->assertEquals(1, $violations->count());
+    } 
+
+    public function testNoDimensionsPassed()
+    {
+        $constraint = new ImageDimension(array());
+
+        $violations = $this->validator->validateValue($this->imagePath, $constraint);
+        
+        $this->assertEquals(0, $violations->count());
+    } 
 
     public function testImageMinMaxDimension()
     {
@@ -47,7 +110,7 @@ class ImageDimensionTest extends \PHPUnit_Framework_TestCase
             'minDimension' => array(3000, 3000)
         ));
 
-        $violations = $this->validator->validateValue(__DIR__.'/../meta/symfony_black_01.png', $constraint);
+        $violations = $this->validator->validateValue($this->imagePath, $constraint);
 
         $this->assertEquals(2, $violations->count());
 
@@ -56,7 +119,7 @@ class ImageDimensionTest extends \PHPUnit_Framework_TestCase
             'minDimension' => array(100, 100)
         ));
 
-        $violations = $this->validator->validateValue(__DIR__.'/../meta/symfony_black_01.png', $constraint);
+        $violations = $this->validator->validateValue($this->imagePath, $constraint);
         $this->assertEquals(1, $violations->count());
 
         $constraint = new ImageDimension(array(
@@ -64,7 +127,7 @@ class ImageDimensionTest extends \PHPUnit_Framework_TestCase
             'minDimension' => array(100, 100)
         ));
 
-        $violations = $this->validator->validateValue(__DIR__.'/../meta/symfony_black_01.png', $constraint);
+        $violations = $this->validator->validateValue($this->imagePath, $constraint);
         $this->assertEquals(0, $violations->count());
     }
 
@@ -74,14 +137,14 @@ class ImageDimensionTest extends \PHPUnit_Framework_TestCase
             'minDimension' => array(200, 200)
         ));
 
-        $violations = $this->validator->validateValue(__DIR__.'/../meta/symfony_black_01.png', $constraint);
+        $violations = $this->validator->validateValue($this->imagePath, $constraint);
         $this->assertEquals(0, $violations->count());
 
         $constraint = new ImageDimension(array(
             'minDimension' => array(3000, 3000)
         ));
 
-        $violations = $this->validator->validateValue(__DIR__.'/../meta/symfony_black_01.png', $constraint);
+        $violations = $this->validator->validateValue($this->imagePath, $constraint);
         $this->assertEquals(1, $violations->count());
     }
 
@@ -91,20 +154,20 @@ class ImageDimensionTest extends \PHPUnit_Framework_TestCase
             'maxDimension' => array(200, 200)
         ));
 
-        $violations = $this->validator->validateValue(__DIR__.'/../meta/symfony_black_01.png', $constraint);
+        $violations = $this->validator->validateValue($this->imagePath, $constraint);
         $this->assertEquals(1, $violations->count());
 
         $constraint = new ImageDimension(array(
             'maxDimension' => array(3000, 3000)
         ));
 
-        $violations = $this->validator->validateValue(__DIR__.'/../meta/symfony_black_01.png', $constraint);
+        $violations = $this->validator->validateValue($this->imagePath, $constraint);
         $this->assertEquals(0, $violations->count());
     }
 
     public function testImageDimensionWithFileInfo()
     {
-        $fileInfo = new SplFileInfo(__DIR__.'/../meta/symfony_black_01.png');
+        $fileInfo = new SplFileInfo($this->imagePath);
 
         $constraint = new ImageDimension(array(
             'maxDimension' => array(200, 200)
