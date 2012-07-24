@@ -41,6 +41,7 @@
       <arg line="--report=checkstyle
               --report-file=${build.dir}/logs/checkstyle.xml
               --standard=Symfony2
+              --ignore=${basedir}/vendor
               ${basedir}" />
     </exec>
   </target>
@@ -51,7 +52,7 @@
       <arg line="--jdepend-xml=${build.dir}/logs/jdepend.xml
               --jdepend-chart=${build.dir}/logs/jdepend-chart.svg
               --overview-pyramid=${build.dir}/logs/jdepend-pyramid.svg
-              --ignore=vendor
+              --ignore=${basedir}/vendor
               ${basedir}" />
     </exec>
   </target>
@@ -69,6 +70,7 @@
   <target name="phploc">
     <exec executable="phploc">
       <arg line="--log-xml ${build.dir}/logs/phploc.xml
+              --exclude ${basedir}/vendor
               ${basedir}" />
     </exec>
   </target>
