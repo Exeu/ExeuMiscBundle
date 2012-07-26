@@ -132,6 +132,26 @@ $randomUsers = $query->getResult();
 // ...
 ```
 
+**Tableprefix**
+
+To set up a tableprefix wich affects all your entitys you can use the provided tableprefix class.
+
+The only thing you have to do is to enable the service in your config file:
+
+``` yaml
+# app/config/config.yml
+
+services:
+    exeu.misc.doctrine.tableprefix:
+        class: Exeu\MiscBundle\Doctrine\TablePrefix
+        arguments: ["myprefix_"]
+        public: false
+        tags:
+          - { name: doctrine.event_subscriber }
+```
+
+Now if you are creating your schema, all tables will be prefixed with "myprefix_".
+
 ### Validation ###
 
 **ImageDimension**
