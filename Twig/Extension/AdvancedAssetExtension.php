@@ -32,8 +32,8 @@ class AdvancedAssetExtension extends \Twig_Extension
     private $staticHost = null;
 
     /**
-     * @param Symfony\Component\DependencyInjection\ContainerInterface $container
-     * @param boolean $staticHost The static host URL
+     * @param ContainerInterface $container The DIContainer
+     * @param boolean $staticHost           The static host URL
      */
     public function __construct(ContainerInterface $container, $staticHost = null)
     {
@@ -56,9 +56,9 @@ class AdvancedAssetExtension extends \Twig_Extension
     /**
      * Returns the public URL of an asset.
      *
-     * @param string $path        A public path
-     * @param boolean $useStaticHost  Use the static host var?
-     * @param string $packageName The name of the asset package to use
+     * @param string $path           A public path
+     * @param boolean $useStaticHost Use the static host var?
+     * @param string $packageName    The name of the asset package to use
      *
      * @return string A public URL which takes into account the base path and URL path
      */
@@ -70,8 +70,8 @@ class AdvancedAssetExtension extends \Twig_Extension
     /**
      * Concats the AssetPath with scheme and hostname from request or an statichost
      *
-     * @param string  $path           A public path
-     * @param boolean $useStaticHost  Use the static host var?
+     * @param string  $path          A public path
+     * @param boolean $useStaticHost Use the static host var?
      *
      * @return string A public URL which takes into account the base path and URL path
      */
