@@ -21,31 +21,10 @@ namespace Exeu\MiscBundle\Tests\Doctrine\Extension;
  * @author Jan Eichhorn <exeu65@googlemail.com>
  *
  */
-class QueryTest extends \PHPUnit_Framework_TestCase
+use Exeu\MiscBundle\Tests\Doctrine\BaseDoctrineTest;
+
+class QueryTest extends BaseDoctrineTest
 {
-    private $entityManager;
-
-    public function setUp()
-    {
-        $config = new \Doctrine\ORM\Configuration();
-        $config->setMetadataCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
-        $config->setQueryCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
-        $config->setProxyDir('/tmp/');
-        $config->setProxyNamespace('Proxie');
-        $config->setAutoGenerateProxyClasses(true);
-
-        $driver = $config->newDefaultAnnotationDriver(__DIR__.'/Entities', false);
-        $config->setMetadataDriverImpl($driver);
-
-        $config->addCustomNumericFunction('RAND', "Exeu\MiscBundle\Doctrine\Extension\Rand");
-        $conn = array(
-            'driver' => 'pdo_sqlite',
-            'memory' => true,
-        );
-
-        $this->entityManager = \Doctrine\ORM\EntityManager::create($conn, $config);
-    }
-
     /**
      * Test for the MySQL Rand Function
      */
