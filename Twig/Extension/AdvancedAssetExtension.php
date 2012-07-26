@@ -26,8 +26,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Jan Eichhorn <exeu65@googlemail.com>
  */
-class AdvancedAssetExtension extends \Twig_Extension {
-
+class AdvancedAssetExtension extends \Twig_Extension
+{
     private $container;
     private $staticHost = null;
 

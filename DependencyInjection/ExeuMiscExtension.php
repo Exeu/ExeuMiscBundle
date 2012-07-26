@@ -23,6 +23,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
+ * ExeuMiscExtension
+ * 
  * @author Jan Eichhorn <exeu65@googlemail.com>
  */
 class ExeuMiscExtension extends Extension

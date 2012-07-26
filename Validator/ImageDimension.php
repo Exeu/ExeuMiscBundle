@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * Constraint for an ImageDimension
+ * 
  * @Annotation
  * @author Jan Eichhorn <exeu65@googlemail.com>
  */

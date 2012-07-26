@@ -32,8 +32,8 @@ class ImageDimensionValidator extends ConstraintValidator
     private $dimensions;
 
     /**
-     * @param object     $file
-     * @param Constraint $constraint
+     * @param mixed      $file       The File either as object or as strinf
+     * @param Constraint $constraint The constraint
      *
      * @return bool
      */
@@ -100,9 +100,9 @@ class ImageDimensionValidator extends ConstraintValidator
         }
 
         if ($this->dimensions[0] < $this->constraint->minDimension[0] || $this->dimensions[1] < $this->constraint->minDimension[1]) {
-           $this->context->addViolation($this->constraint->minMessage, array(
-               '%width%' => $this->constraint->minDimension[0],
-               '%height%' => $this->constraint->minDimension[1]
+            $this->context->addViolation($this->constraint->minMessage, array(
+                '%width%' => $this->constraint->minDimension[0],
+                '%height%' => $this->constraint->minDimension[1]
             ));
 
             return false;

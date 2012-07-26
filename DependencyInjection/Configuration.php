@@ -21,6 +21,8 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
+ * Configuration
+ * 
  * @author Jan Eichhorn <exeu65@googlemail.com>
  */
 class Configuration implements ConfigurationInterface
