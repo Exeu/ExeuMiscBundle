@@ -16,8 +16,9 @@
   </target>
 
   <target name="buildEnv">
-    <exec executable="curl">
-        <arg line="-s https://getcomposer.org/installer | php" />
+    <exec executable="bash">
+    	<arg value="-c"/>
+        <arg line='"curl -s https://getcomposer.org/installer | php"' />
     </exec>
     <exec executable="php">
         <arg line="composer.phar install" />
