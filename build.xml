@@ -14,7 +14,16 @@
     <mkdir dir="${build.dir}/logs" />
     <mkdir dir="${build.dir}/pdepend" />
   </target>
-  
+
+  <target name="buildEnv">
+    <exec executable="curl">
+        <arg line="-s https://getcomposer.org/installer | php" />
+    </exec>
+    <exec executable="php">
+        <arg line="composer.phar install" />
+    </exec>
+  </target>
+
   <!-- Run pdepend, phpmd, phpcpd, and phpcs in parallel -->
   <target name="parallelTasks">
     <parallel>
@@ -29,8 +38,8 @@
   <!-- Generate pmd.xml -->
   <target name="phpmd">
     <exec executable="phpmd">
-      <arg line="${basedir} xml codesize,unusedcode,naming,design 
-      --reportfile ${build.dir}/logs/pmd.xml 
+      <arg line="${basedir} xml codesize,unusedcode,naming,design
+      --reportfile ${build.dir}/logs/pmd.xml
       --exclude vendor,Tests" />
     </exec>
   </target>
@@ -86,5 +95,13 @@
               --output=${build.dir}/code-browser" />
     </exec>
   </target>
-  <target name="build" depends="clean,parallelTasks,phpcb" />
+
+  <target name="phpunit" description="Run unit tests with PHPUnit">
+    <exec executable="phpunit" failonerror="true">
+        <arg line="--coverage-clover ${build.dir}/coverage/clover.xml
+            --coverage-html ${build.dir}/coverage/ ${basedir}" />
+    </exec>
+  </target>
+
+  <target name="build" depends="clean,buildEnv,parallelTasks,phpunit,phpcb" />
 </project>
