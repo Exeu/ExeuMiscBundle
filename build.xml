@@ -98,9 +98,9 @@
   </target>
 
   <target name="phpunit" description="Run unit tests with PHPUnit">
-    <exec executable="phpunit" failonerror="true">
+    <exec executable="phpunit">
         <arg line="--coverage-clover ${build.dir}/coverage/clover.xml
-            --coverage-html ${build.dir}/coverage/ ${basedir}" />
+            --coverage-html ${build.dir}/coverage/" />
     </exec>
   </target>
 
