@@ -21,7 +21,7 @@
         <arg line='"curl -s https://getcomposer.org/installer | php"' />
     </exec>
     <exec executable="php">
-        <arg line="composer.phar install" />
+        <arg line="composer.phar install --dev" />
     </exec>
   </target>
 
