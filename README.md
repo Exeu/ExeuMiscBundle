@@ -212,7 +212,7 @@ invalidFileMessage -> The message that shold be displayed when the file is no va
 
 **If you only provide either minDimension or maxDimension your image will validate only against this dimension**
 
-**Combine it with the ImageValidator**
+**Combine it with the Symfony ImageValidator**
 
 ``` php
 <?php
