@@ -22,7 +22,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Configuration
- * 
+ *
  * @author Jan Eichhorn <exeu65@googlemail.com>
  */
 class Configuration implements ConfigurationInterface
@@ -38,6 +38,14 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('twig')
                 ->children()
                     ->scalarNode('staticHost')
+                        ->cannotBeEmpty()
+                        ->defaultNull()
+                    ->end()
+                ->end()
+                ->end()
+                ->arrayNode('cache')
+                ->children()
+                    ->scalarNode('driver_class')
                         ->cannotBeEmpty()
                         ->defaultNull()
                     ->end()
