@@ -17,23 +17,40 @@
 
 namespace Exeu\MiscBundle\Cache\Driver;
 
+/**
+ * A APC implementation 
+ *
+ * @author Jan Eichhorn <exeu65@googlemail.com>
+ */
 class APC implements DriverInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function read($id)
     {
         return unserialize(apc_fetch($id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function write($id, $data, $ttl = 0)
     {
         return apc_store($id, serialize($data), $ttl);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function delete($id)
     {
         return apc_delete($id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function acceleratorName()
     {
         return 'apc';

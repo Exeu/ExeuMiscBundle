@@ -19,24 +19,36 @@ namespace Exeu\MiscBundle\Cache;
 
 use Exeu\MiscBundle\Cache\Driver\DriverInterface;
 
+/**
+ * The Cachemanager
+ *
+ * @author Jan Eichhorn <exeu65@googlemail.com>
+ */
 class CacheManager
 {
     protected $cacheDriver;
     protected $readyForUse = false;
 
+    /**
+     * Constructor
+     * 
+     * @param DriverInterface $cacheDriver
+     */
     public function __construct(DriverInterface $cacheDriver)
     {
         $this->cacheDriver = $cacheDriver;
         $this->checkDriver();
     }
 
-    protected function checkDriver()
-    {
-        if (extension_loaded($this->cacheDriver->acceleratorName())) {
-            $this->readyForUse = true;
-        }
-    }
-
+    /**
+     * Writes an cache entry
+     * 
+     * @param string  $id   The cache key
+     * @param mixed   $data The data to be stored
+     * @param integer $ttl  Time to life for this cache entry
+     * 
+     * @return boolean True=Success|False=No success
+     */
     public function write($id, $data, $ttl = 0)
     {
         if (true === $this->readyForUse) {
@@ -44,6 +56,13 @@ class CacheManager
         }
     }
 
+    /**
+     * Deletes an cache entry
+     * 
+     * @param string $id The cache key
+     * 
+     * @return boolean True=Success|False=No success
+     */
     public function delete($id)
     {
         if (true === $this->readyForUse) {
@@ -51,6 +70,13 @@ class CacheManager
         }
     }
 
+    /**
+     * Reads an cache entry
+     * 
+     * @param string $id The cache key
+     * 
+     * @return mixed
+     */
     public function read($id)
     {
         if (false === $this->readyForUse) {
@@ -58,5 +84,12 @@ class CacheManager
         }
 
         return $this->cacheDriver->read($id);
+    }
+
+    protected function checkDriver()
+    {
+        if (extension_loaded($this->cacheDriver->acceleratorName())) {
+            $this->readyForUse = true;
+        }
     }
 }

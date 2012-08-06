@@ -17,13 +17,48 @@
 
 namespace Exeu\MiscBundle\Cache\Driver;
 
+/**
+ * The cachedriver Interface
+ * Can be used in the Exeu\MiscBundle\Cache\CacheManager
+ *
+ * @author Jan Eichhorn <exeu65@googlemail.com>
+ */
 interface DriverInterface
 {
+    /**
+     * Reads an cache entry
+     * 
+     * @param string $id The cache key
+     * 
+     * @return mixed
+     */
     function read($id);
 
+    /**
+     * Writes an cache entry
+     * 
+     * @param string  $id   The cache key
+     * @param mixed   $data The data to be stored
+     * @param integer $ttl  Time to life for this cache entry
+     * 
+     * @return boolean True=Success|False=No success
+     */
     function write($id, $data, $ttl = 0);
 
+    /**
+     * Deletes an cache entry
+     * 
+     * @param string $id The cache key
+     * 
+     * @return boolean True=Success|False=No success
+     */
     function delete($id);
 
+    /**
+     * Gets the acceleratorname
+     * E.g. APC or xCahe
+     * 
+     * @return string The acceleratorname
+     */
     function acceleratorName();
 }

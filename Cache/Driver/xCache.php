@@ -17,23 +17,40 @@
 
 namespace Exeu\MiscBundle\Cache\Driver;
 
+/**
+ * A xCache implementation 
+ *
+ * @author Jan Eichhorn <exeu65@googlemail.com>
+ */
 class xCache implements DriverInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function read($id)
     {
         return unserialize(xcache_get($id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function write($id, $data, $ttl = 0)
     {
         return xcache_set($id, serialize($data), $ttl);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function delete($id)
     {
         return xcache_unset($id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function acceleratorName()
     {
         return 'xcache';
