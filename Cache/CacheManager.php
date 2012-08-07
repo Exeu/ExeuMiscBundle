@@ -27,11 +27,10 @@ use Exeu\MiscBundle\Cache\Driver\DriverInterface;
 class CacheManager
 {
     protected $cacheDriver;
-    protected $readyForUse = false;
 
     /**
      * Constructor
-     * 
+     *
      * @param DriverInterface $cacheDriver
      */
     public function __construct(DriverInterface $cacheDriver)
@@ -42,54 +41,46 @@ class CacheManager
 
     /**
      * Writes an cache entry
-     * 
+     *
      * @param string  $id   The cache key
      * @param mixed   $data The data to be stored
      * @param integer $ttl  Time to life for this cache entry
-     * 
+     *
      * @return boolean True=Success|False=No success
      */
     public function write($id, $data, $ttl = 0)
     {
-        if (true === $this->readyForUse) {
-            return $this->cacheDriver->write($id, $data, $ttl);
-        }
+        return $this->cacheDriver->write($id, $data, $ttl);
     }
 
     /**
      * Deletes an cache entry
-     * 
+     *
      * @param string $id The cache key
-     * 
+     *
      * @return boolean True=Success|False=No success
      */
     public function delete($id)
     {
-        if (true === $this->readyForUse) {
-            return $this->cacheDriver->delete($id);
-        }
+        return $this->cacheDriver->delete($id);
     }
 
     /**
      * Reads an cache entry
-     * 
+     *
      * @param string $id The cache key
-     * 
+     *
      * @return mixed
      */
     public function read($id)
     {
-        if (false === $this->readyForUse) {
-            return null;
-        }
-
         return $this->cacheDriver->read($id);
     }
 
     protected function checkDriver()
     {
-        if (extension_loaded($this->cacheDriver->acceleratorName())) {
-            $this->readyForUse = true;
+        if (false === extension_loaded($this->cacheDriver->acceleratorName())) {
+            throw new \InvalidArgumentException(sprintf("The cachedriver %s could not be loaded. Please check if the PHPExtension is installed on your system!", $this->cacheDriver->acceleratorName()));
         }
     }
 }

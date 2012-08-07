@@ -39,10 +39,13 @@ class ExeuMiscExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $this->loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $this->loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $this->loadTwig($configs, $container);
-        $this->loadCache($configs, $container);
+        $this->loadTwig($config, $container);
+
+        if (true === isset($config['cache'])) {
+            $this->loadCache($config, $container);
+        }
     }
 
     /**
@@ -51,10 +54,9 @@ class ExeuMiscExtension extends Extension
      * @param array            $configs
      * @param ContainerBuilder $container
      */
-    protected function loadTwig(array $configs, ContainerBuilder $container)
+    protected function loadTwig(array $config, ContainerBuilder $container)
     {
         $this->loader->load('twig.xml');
-
         if (false === empty($config['twig']['staticHost'])) {
             $container->getDefinition('exeu.extra.twig.advancedassets')->replaceArgument(1, $config['twig']['staticHost']);
         }
@@ -66,10 +68,9 @@ class ExeuMiscExtension extends Extension
      * @param array            $configs
      * @param ContainerBuilder $container
      */
-    protected function loadCache(array $configs, ContainerBuilder $container)
+    protected function loadCache(array $config, ContainerBuilder $container)
     {
         $this->loader->load('cache.xml');
-
         if (false === empty($config['cache']['driver_class'])) {
             $container->getDefinition('exeu.extra.cache.driver')->setClass($config['cache']['driver_class']);
         }

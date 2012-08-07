@@ -224,3 +224,7 @@ invalidFileMessage -> The message that shold be displayed when the file is no va
 private $file;
 // ...
 ```
+
+### Cache ###
+
+doc is under construction

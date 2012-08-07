@@ -4,16 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-<!--     <parameters>
+    <parameters>
         <parameter key="cache.manager.class">Exeu\MiscBundle\Cache\CacheManager</parameter>
     </parameters>
 
     <services>
-        <service id="exeu.extra.cache.driver" public="false" />
+        <service id="exeu.extra.cache.driver" class="Exeu\MiscBundle\Cache\Driver\APC" public="false" />
 
         <service id="exeu.extra.cache.manager" class="%cache.manager.class%" public="true">
             <argument type="service" id="exeu.extra.cache.driver" />
         </service>
+
+        <service id="ex.cache" alias="exeu.extra.cache.manager" />
     </services>
- -->
+
 </container>
