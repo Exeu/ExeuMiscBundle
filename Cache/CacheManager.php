@@ -42,39 +42,39 @@ class CacheManager
     /**
      * Writes an cache entry
      *
-     * @param string  $id   The cache key
+     * @param string  $key  The cache key
      * @param mixed   $data The data to be stored
      * @param integer $ttl  Time to life for this cache entry
      *
      * @return boolean True=Success|False=No success
      */
-    public function write($id, $data, $ttl = 0)
+    public function write($key, $data, $ttl = 0)
     {
-        return $this->cacheDriver->write($id, $data, $ttl);
+        return $this->cacheDriver->write($key, $data, $ttl);
     }
 
     /**
      * Deletes an cache entry
      *
-     * @param string $id The cache key
+     * @param string $key The cache key
      *
      * @return boolean True=Success|False=No success
      */
-    public function delete($id)
+    public function delete($key)
     {
-        return $this->cacheDriver->delete($id);
+        return $this->cacheDriver->delete($key);
     }
 
     /**
      * Reads an cache entry
      *
-     * @param string $id The cache key
+     * @param string $key The cache key
      *
      * @return mixed
      */
-    public function read($id)
+    public function read($key)
     {
-        return $this->cacheDriver->read($id);
+        return $this->cacheDriver->read($key);
     }
 
     protected function checkDriver()

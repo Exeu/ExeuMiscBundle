@@ -48,12 +48,6 @@ class ExeuMiscExtension extends Extension
         }
     }
 
-    /**
-     * Loads the Twig Extensions
-     *
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     */
     protected function loadTwig(array $config, ContainerBuilder $container)
     {
         $this->loader->load('twig.xml');
@@ -62,12 +56,6 @@ class ExeuMiscExtension extends Extension
         }
     }
 
-    /**
-     * Loads the Cache Extension
-     *
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     */
     protected function loadCache(array $config, ContainerBuilder $container)
     {
         $this->loader->load('cache.xml');

@@ -27,25 +27,25 @@ class xCache implements DriverInterface
     /**
      * {@inheritDoc}
      */
-    public function read($id)
+    public function read($key)
     {
-        return unserialize(xcache_get($id));
+        return unserialize(xcache_get($key));
     }
 
     /**
      * {@inheritDoc}
      */
-    public function write($id, $data, $ttl = 0)
+    public function write($key, $data, $ttl = 0)
     {
-        return xcache_set($id, serialize($data), $ttl);
+        return xcache_set($key, serialize($data), $ttl);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function delete($id)
+    public function delete($key)
     {
-        return xcache_unset($id);
+        return xcache_unset($key);
     }
 
     /**

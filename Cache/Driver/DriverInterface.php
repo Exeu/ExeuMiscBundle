@@ -27,37 +27,37 @@ interface DriverInterface
 {
     /**
      * Reads an cache entry
-     * 
-     * @param string $id The cache key
-     * 
+     *
+     * @param string $key The cache key
+     *
      * @return mixed
      */
-    function read($id);
+    function read($key);
 
     /**
      * Writes an cache entry
-     * 
-     * @param string  $id   The cache key
+     *
+     * @param string  $key  The cache key
      * @param mixed   $data The data to be stored
      * @param integer $ttl  Time to life for this cache entry
-     * 
+     *
      * @return boolean True=Success|False=No success
      */
-    function write($id, $data, $ttl = 0);
+    function write($key, $data, $ttl = 0);
 
     /**
      * Deletes an cache entry
-     * 
-     * @param string $id The cache key
-     * 
+     *
+     * @param string $key The cache key
+     *
      * @return boolean True=Success|False=No success
      */
-    function delete($id);
+    function delete($key);
 
     /**
      * Gets the acceleratorname
      * E.g. APC or xCahe
-     * 
+     *
      * @return string The acceleratorname
      */
     function acceleratorName();

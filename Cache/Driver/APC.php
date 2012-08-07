@@ -27,25 +27,25 @@ class APC implements DriverInterface
     /**
      * {@inheritDoc}
      */
-    public function read($id)
+    public function read($key)
     {
-        return unserialize(apc_fetch($id));
+        return unserialize(apc_fetch($key));
     }
 
     /**
      * {@inheritDoc}
      */
-    public function write($id, $data, $ttl = 0)
+    public function write($key, $data, $ttl = 0)
     {
-        return apc_store($id, serialize($data), $ttl);
+        return apc_store($key, serialize($data), $ttl);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function delete($id)
+    public function delete($key)
     {
-        return apc_delete($id);
+        return apc_delete($key);
     }
 
     /**
