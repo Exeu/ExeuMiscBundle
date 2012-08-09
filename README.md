@@ -1,7 +1,15 @@
 Exeu Misc Bundle
 ========================
 
+## Build Status ##
+
+Travis: 
+
 [![Build Status](https://secure.travis-ci.org/Exeu/ExeuMiscBundle.png?branch=master)](http://travis-ci.org/Exeu/ExeuMiscBundle)
+
+Jenkins:
+
+[![Build Status](http://ci.pixel-web.org/job/ExeuMiscBundle/badge/icon)](http://ci.pixel-web.org/job/ExeuMiscBundle/)
 
 ## Installation
 
