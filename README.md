@@ -3,7 +3,7 @@ Exeu Misc Bundle
 
 ## Build Status ##
 
-Travis: 
+Travis:
 
 [![Build Status](https://secure.travis-ci.org/Exeu/ExeuMiscBundle.png?branch=master)](http://travis-ci.org/Exeu/ExeuMiscBundle)
 
@@ -235,4 +235,60 @@ private $file;
 
 ### Cache ###
 
-doc is under construction
+Sometimes it is usefull to use a PHPCache like APC to store some variables or complex objects directly in the shared memory of the server to get very fast access.
+
+For this reason there is a so called cachmanager provided in this bundle.
+
+To activate this cachemanager you have to enable it in your config:
+
+``` yaml
+# app/config/config.yml
+
+exeu_misc:
+    cache: ~
+```
+
+Now you can access the cachemanager for example in your controller:
+
+``` php
+<?php
+// ...
+$cacheManager = $this->get('exeu.extra.cache.manager');
+$cacheManager = $this->get('ex.cache'); // Shortcut
+
+$data = array('foo' => 'bar');
+$cacheManager->write('my_key', $data);
+
+// ...
+
+$data = $cacheManager->read('my_key');
+
+// ...
+
+$cacheManager->delete('my_key');
+// ...
+```
+
+For full information about the functions you can call see Exeu\MiscBundle\Cache\CacheManager
+
+By default the cachmanager uses a APC cachedriver: Exeu\MiscBundle\Cache\Driver\APC
+
+This class can be changed in your config:
+
+``` yaml
+# app/config/config.yml
+
+exeu_misc:
+    cache:
+      driver_class: Exeu\MiscBundle\Cache\Driver\xCache
+```
+
+You can implement your own cachedriver by creating a class which implements Exeu\MiscBundle\Cache\Driver\DriverInterface
+
+``` yaml
+# app/config/config.yml
+
+exeu_misc:
+    cache:
+      driver_class: Acme\DemoBundle\MyCache\Driver\FooDriver
+```
