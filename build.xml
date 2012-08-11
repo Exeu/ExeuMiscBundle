@@ -90,9 +90,9 @@
   <target name="phpcb">
     <exec executable="phpcb">
       <arg line="--log=${build.dir}/logs
-              --exclude ${basedir}/vendor
-              --exclude ${basedir}/Tests
               --source=${basedir}
+              --exclude=${basedir}/vendor
+              --exclude=${basedir}/Tests
               --output=${build.dir}/code-browser" />
     </exec>
   </target>
