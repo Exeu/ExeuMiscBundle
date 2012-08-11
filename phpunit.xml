@@ -2,7 +2,7 @@
 <phpunit bootstrap="./Tests/bootstrap.php" colors="true" verbose="true">
     <testsuites>
         <testsuite name="ExeuMiscBundle Test Suite">
-            <directory>./Tests</directory>
+            <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -10,7 +10,10 @@
         <whitelist>
             <directory>./</directory>
             <exclude>
+                <directory>./Resources</directory>
+                <directory>./Tests</directory>
                 <directory>./vendor</directory>
+                <directory>./Twig</directory>
             </exclude>
         </whitelist>
     </filter>
