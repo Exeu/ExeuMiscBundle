@@ -38,5 +38,11 @@ class TablePrefixTest extends BaseDoctrineTest
         
         $expectedSql = "SELECT m0_.id AS id0, m0_.name AS name1 FROM myprefix_TestEntity m0_";
         $this->assertEquals($expectedSql, $query->getSql());
+        
+        $dql = "SELECT t FROM Exeu\MiscBundle\Tests\Entities\TestEntityB t JOIN t.testEntities";
+        $query = $this->entityManager->createQuery($dql);
+        
+        $expectedSql = "SELECT m0_.id AS id0, m0_.name AS name1 FROM myprefix_TestEntityB m0_ INNER JOIN myprefix_entity_entityB m2_ ON m0_.id = m2_.testentityb_id INNER JOIN myprefix_TestEntity m1_ ON m1_.id = m2_.testentity_id";
+        $this->assertEquals($expectedSql, $query->getSql());
     }
 }
