@@ -14,6 +14,8 @@
                 <directory>./Tests</directory>
                 <directory>./vendor</directory>
                 <directory>./Twig</directory>
+                <directory>./DependencyInjection</directory>
+                <file>./ExeuMiscBundle.php</file>
             </exclude>
         </whitelist>
     </filter>
