@@ -54,7 +54,7 @@ class ImageDimensionValidator extends ConstraintValidator
 
             $filePath = $file->getPathname();
         } else {
-            throw new \InvalidArgumentException("The Property you validate has to be either an object from kind \SplFileInfo or a String with the full file path");
+            throw new \InvalidArgumentException("The property you validate has to be either an object from kind \SplFileInfo or a string with the full file path");
         }
 
         $this->dimensions = getimagesize($filePath);
